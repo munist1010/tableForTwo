@@ -1,2 +1,2 @@
 # tableForTwo
-A local restaurant rating web service
+A Blazor / ASP.NET web application for local restaurant reviews
