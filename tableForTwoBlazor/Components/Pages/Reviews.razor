@@ -1,0 +1,83 @@
+﻿@page "/reviews"
+@attribute [StreamRendering]
+
+<PageTitle>Restaurants</PageTitle>
+
+<h1>Reviews</h1>
+
+<p>This component demonstrates showing data.</p>
+
+
+@if (restaurants == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <button onclick="@getReviews()"></button>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>ID</th>
+                <th>Location</th>
+                <th>Rating</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var restaurant in restaurants)
+            {
+                <tr>
+                    <td>@restaurant.Name</td>
+                    <td>@restaurant.Id</td>
+                    <td>@restaurant.Location</td>
+                    <td>@restaurant.Rating</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+ }
+
+
+@code {
+    List<Restaurant> restaurants = new List<Restaurant>();
+    async Task getReviews()
+    {
+        await Task.Delay(500);
+
+        var restaurantNames = new[] { "Italian place", "Chinese place", "Mexican place", "Spanish place", "Sicillian place" };
+
+
+        try
+        {
+
+            for (int i = 0; i < restaurantNames.Length; i++)
+            {
+                restaurants.Add(new Restaurant("Restaurant", 1, "name", 0.01f));
+            }
+
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+
+
+    }
+
+    private class Restaurant
+    {
+        public string? Name { get; set; }
+        public int Id { get; set; }
+        public string? Location { get; set; }
+        public float Rating { get; set; }
+
+
+        public Restaurant(string? name, int id, string? location, float rating) {
+            Name = name;
+            Id = id;
+            Location = location;
+            Rating = rating;
+        }
+    }
+}
